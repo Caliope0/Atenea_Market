@@ -10,7 +10,7 @@ import { addProductsToCart, getCartProducts } from '../controllers/cartControlle
 
 const myRouter:Router= Router()
 
-myRouter.get('/', getCartProducts)
+myRouter.get('/',  getCartProducts)
 myRouter.post('/', addProductsToCart)
 
 export default myRouter

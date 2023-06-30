@@ -5,18 +5,29 @@
  */
 
 import { PrismaClient } from "@prisma/client"
+import { error } from "console"
 import { Request, Response } from 'express'
 
 const prisma = new PrismaClient()
 
 export const getProductInventory = async (req: Request, res: Response) => {
 
-    //TO DO: Filtrar los elementos
+    const { idProduct } = req.params
+    let myProduct = parseInt(idProduct)
+    
+    //verificar que idProduct sea un número
+
+    if(isNaN(myProduct)){
+        res.status(400)
+        res.json({error: 'Bad Request'})
+        return
+    }
+
     try {
         const ProductInventory = await prisma.product.findUnique(
             {
-                where:{
-                    id:1
+                where: {
+                    id: myProduct
                 }
             }
         )
